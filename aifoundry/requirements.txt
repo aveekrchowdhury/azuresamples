@@ -1,0 +1,18 @@
+# Azure AI Foundry Response API Dependencies
+
+# OpenAI SDK for Azure OpenAI integration
+openai>=1.0.0
+
+# Azure AI Inference SDK
+azure-ai-inference>=1.0.0
+
+# Core HTTP requests
+requests>=2.31.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# JSON handling (built into Python)
+# Additional useful packages for development
+jupyter>=1.0.0
+ipython>=8.0.0
