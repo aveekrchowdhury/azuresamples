@@ -1,0 +1,4 @@
+# Requirements for HTML to DOCX Converter
+python-docx==0.8.11
+beautifulsoup4==4.12.2
+lxml==4.9.3
