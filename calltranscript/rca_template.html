@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Cause Analysis Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fafafa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: 300;
+        }
+        
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #0078d4;
+        }
+        
+        h1 {
+            color: #0078d4;
+            border-bottom: 2px solid #0078d4;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #323130;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            color: #605e5c;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .incident-summary {
+            background: linear-gradient(135deg, #fff4ce 0%, #fef7da 100%);
+            padding: 20px;
+            border-left: 5px solid #ffb900;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .critical-info {
+            background: linear-gradient(135deg, #fdecec 0%, #fdf2f2 100%);
+            padding: 20px;
+            border-left: 5px solid #d13438;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .timeline {
+            background: linear-gradient(135deg, #f3f2f1 0%, #f8f7f6 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .timeline ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .timeline li {
+            position: relative;
+            padding: 10px 0 10px 30px;
+            border-left: 2px solid #0078d4;
+            margin-left: 10px;
+        }
+        
+        .timeline li:before {
+            content: '●';
+            position: absolute;
+            left: -6px;
+            top: 12px;
+            color: #0078d4;
+            font-size: 12px;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+            padding: 2px 0;
+        }
+        
+        strong {
+            color: #323130;
+            font-weight: 600;
+        }
+        
+        em {
+            color: #605e5c;
+            font-style: italic;
+        }
+        
+        .actions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .actions-table th {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .actions-table td {
+            padding: 12px;
+            border-bottom: 1px solid #edebe9;
+        }
+        
+        .actions-table tr:nth-child(even) {
+            background-color: #f8f7f6;
+        }
+        
+        .status-complete {
+            background-color: #dff6dd;
+            color: #107c10;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff4ce;
+            color: #8a8886;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .priority-high {
+            color: #d13438;
+            font-weight: 600;
+        }
+        
+        .priority-medium {
+            color: #ffb900;
+            font-weight: 600;
+        }
+        
+        .priority-low {
+            color: #107c10;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f3f2f1;
+            border-radius: 8px;
+            text-align: center;
+            color: #605e5c;
+            font-size: 0.9em;
+        }
+        
+        code {
+            background-color: #f3f2f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d73502;
+        }
+        
+        .metadata {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f7f6;
+            border-radius: 5px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metadata-label {
+            font-weight: 600;
+            color: #323130;
+            font-size: 0.9em;
+        }
+        
+        .metadata-value {
+            color: #605e5c;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{document_title}}</h1>
+    </div>
+    
+    <div class="section">
+        <h2>Incident Summary</h2>
+        <div class="incident-summary">
+            {{incident_summary_content}}
+        </div>
+        
+        <div class="metadata">
+            <div class="metadata-item">
+                <span class="metadata-label">Date:</span>
+                <span class="metadata-value">{{incident_date}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Duration:</span>
+                <span class="metadata-value">{{incident_duration}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Impact:</span>
+                <span class="metadata-value">{{incident_impact}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Severity:</span>
+                <span class="metadata-value">{{incident_severity}}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Timeline</h2>
+        <div class="timeline">
+            {{timeline_content}}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Root Cause</h2>
+        <div class="critical-info">
+            {{root_cause_content}}
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Corrective Actions</h2>
+        {{corrective_actions_content}}
+    </div>
+    
+    <div class="section">
+        <h2>Lessons Learned</h2>
+        {{lessons_learned_content}}
+    </div>
+    
+    <div class="footer">
+        <p>Root Cause Analysis Report | Generated on {{generation_date}}</p>
+    </div>
+</body>
+</html>
